@@ -11,7 +11,6 @@ import {PlacementRepository} from '../../store/placement.repository';
 })
 export class ChartComponent implements OnInit {
   chartData: any[] = [];
-  view: [number, number] = [700, 400];
   colorScheme = 'vivid';
 
   // Options for the chart
