@@ -1,0 +1,22 @@
+<form (ngSubmit)="applyFilters()">
+  <mat-form-field>
+    <mat-label>Platform</mat-label>
+    <mat-select [(ngModel)]="selectedPlatform" name="platform">
+      <mat-option *ngFor="let option of platformOptions" [value]="option">
+        {{ option || 'All' }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Min Total</mat-label>
+    <input matInput type="number" [(ngModel)]="minTotal" name="minTotal"/>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Min Invalid Total</mat-label>
+    <input matInput type="number" [(ngModel)]="minInvalidTotal" name="minInvalidTotal"/>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Apply Filters</button>
+</form>

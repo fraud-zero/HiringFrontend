@@ -1,0 +1,31 @@
+<!-- src/app/components/table/table.component.html -->
+<table mat-table [dataSource]="placements" class="mat-elevation-z8">
+  <!-- Key Column -->
+  <ng-container matColumnDef="key">
+    <th mat-header-cell *matHeaderCellDef> Key</th>
+    <td mat-cell *matCellDef="let element"> {{ element.key }}</td>
+  </ng-container>
+
+  <!-- Platform Column -->
+  <ng-container matColumnDef="platform">
+    <th mat-header-cell *matHeaderCellDef> Platform</th>
+    <td mat-cell *matCellDef="let element"> {{ element.platform }}</td>
+  </ng-container>
+
+  <!-- Total Column -->
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef> Total</th>
+    <td mat-cell *matCellDef="let element"> {{ element.total }}</td>
+  </ng-container>
+
+  <!-- Invalid Total Column -->
+  <ng-container matColumnDef="invalid_total">
+    <th mat-header-cell *matHeaderCellDef> Invalid Total</th>
+    <td mat-cell *matCellDef="let element"> {{ element.invalid_total }}</td>
+  </ng-container>
+
+  <!-- Add more columns as needed -->
+
+  <tr mat-header-row *matHeaderRowDef="['key', 'platform', 'total', 'invalid_total']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['key', 'platform', 'total', 'invalid_total']"></tr>
+</table>
