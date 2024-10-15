@@ -20,7 +20,7 @@ import {AsyncPipe} from "@angular/common";
     AsyncPipe,
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'], // Note the change from 'styleUrl' to 'styleUrls'
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'fraud0-dashboard';

@@ -1,4 +1,3 @@
-// src/app/components/chart/chart.component.ts
 import {Component, OnInit} from '@angular/core';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {PlacementRepository} from '../../store/placement.repository';

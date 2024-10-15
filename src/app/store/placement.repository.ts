@@ -1,4 +1,3 @@
-// src/app/store/placement.repository.ts
 import {Injectable} from '@angular/core';
 import {createStore, select, withProps} from '@ngneat/elf';
 import {Placement} from '../models/placement.model';
@@ -17,6 +16,10 @@ export interface PlacementState {
     totalPages: number;
     totalHits: number;
   };
+  sort: {
+    sort_by: string;
+    sort_order: 'asc' | 'desc';
+  };
 }
 
 const initialState: PlacementState = {
@@ -32,6 +35,10 @@ const initialState: PlacementState = {
     totalPages: 1,
     totalHits: 0,
   },
+  sort: {
+    sort_by: 'total', // Default sort field
+    sort_order: 'desc', // Default sort order
+  },
 };
 
 const store = createStore(
@@ -45,6 +52,7 @@ export class PlacementRepository {
   placements$ = store.pipe(select((state) => state.placements));
   filters$ = store.pipe(select((state) => state.filters));
   pagination$ = store.pipe(select((state) => state.pagination));
+  sort$ = store.pipe(select((state) => state.sort));
 
   // Updaters
   updatePlacements(placements: Placement[]) {
@@ -62,6 +70,13 @@ export class PlacementRepository {
     store.update((state) => ({
       ...state,
       pagination: {...state.pagination, ...pagination},
+    }));
+  }
+
+  updateSort(sort: Partial<PlacementState['sort']>) {
+    store.update((state) => ({
+      ...state,
+      sort: {...state.sort, ...sort},
     }));
   }
 

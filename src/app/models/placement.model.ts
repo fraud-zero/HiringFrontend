@@ -1,4 +1,3 @@
-// src/app/models/placement.model.ts
 export interface Placement {
   key: string;
   platform: string;
@@ -17,7 +16,6 @@ export interface Placement {
   other_invalid_percent: string;
 }
 
-// src/app/models/placement-response.model.ts
 export interface Pagination {
   total_hits: number;
   per_page: number;
