@@ -1,10 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
-import {PlacementRepository} from '../../store/placement.repository';
-import {Placement} from '../../models/placement.model';
-import {PlacementService} from '../../services/placement.service';
-import {MatSort, Sort} from '@angular/material/sort';
-import {MatSortModule} from '@angular/material/sort';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
+// Removed PlacementRepository and PlacementService imports
 
 @Component({
   selector: 'app-table',
@@ -14,45 +12,21 @@ import {MatSortModule} from '@angular/material/sort';
   imports: [MatTableModule, MatSortModule],
 })
 export class TableComponent implements OnInit {
-  placements: Placement[] = [];
+  placements: any[] = []; // Replace 'any' with appropriate type when implementing
   displayedColumns: string[] = ['key', 'platform', 'total', 'invalid_total'];
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private placementRepo: PlacementRepository,
-    private placementService: PlacementService
-  ) {
+  constructor(/* Inject services if needed */) {
+    // Initialization if necessary
   }
 
   ngOnInit() {
-    // Subscribe to placements
-    this.placementRepo.placements$.subscribe((placements) => {
-      this.placements = placements;
-    });
-
-    // Subscribe to sort changes
-    this.placementRepo.sort$.subscribe((sort) => {
-      // Optionally, you can update the sort UI here if needed
-    });
-
-    // Initial fetch
-    this.placementService.fetchPlacements().subscribe();
+    // TODO: Subscribe to the placements state and populate placements array
+    // TODO: Initialize sorting if necessary
   }
 
   onSortChange(sortState: Sort) {
-    const sortBy = sortState.active;
-    const sortOrder = sortState.direction || 'asc';
-
-    this.placementRepo.updateSort({
-      sort_by: sortBy,
-      sort_order: sortOrder as 'asc' | 'desc',
-    });
-
-    // Reset to first page when sorting changes
-    this.placementRepo.updatePagination({currentPage: 1});
-
-    // Fetch placements with new sort
-    this.placementService.fetchPlacements().subscribe();
+    // TODO: Handle sort changes and update state accordingly
   }
 }

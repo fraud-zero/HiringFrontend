@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {NgIf, AsyncPipe} from '@angular/common';
-import {PlacementRepository} from '../../store/placement.repository';
-import {PlacementService} from '../../services/placement.service';
 
 @Component({
   selector: 'app-pagination',
@@ -11,17 +9,14 @@ import {PlacementService} from '../../services/placement.service';
   imports: [NgIf, AsyncPipe, MatPaginatorModule],
 })
 export class PaginationComponent {
-  pagination$ = this.placementRepo.pagination$;
+  // TODO: Subscribe to pagination state
 
-  constructor(
-    private placementRepo: PlacementRepository,
-    private placementService: PlacementService
-  ) {
+  constructor(/* Inject services if needed */) {
+    // Initialization if necessary
   }
 
   changePage(event: PageEvent) {
-    const page = event.pageIndex + 1;
-    this.placementRepo.updatePagination({currentPage: page});
-    this.placementService.fetchPlacements().subscribe();
+    // TODO: Update pagination state based on page event
+    // TODO: Trigger data fetch based on new pagination
   }
 }

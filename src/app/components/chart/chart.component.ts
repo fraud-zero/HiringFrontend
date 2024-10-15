@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {PlacementRepository} from '../../store/placement.repository';
+import { Component, OnInit } from '@angular/core';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+// Removed PlacementRepository import
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.scss'],
   standalone: true,
   imports: [NgxChartsModule],
 })
@@ -18,15 +19,11 @@ export class ChartComponent implements OnInit {
   showLegend = true;
   showLabels = true;
 
-  constructor(private placementRepo: PlacementRepository) {
+  constructor(/* Inject services if needed */) {
+    // Initialization if necessary
   }
 
   ngOnInit() {
-    this.placementRepo.placements$.subscribe((placements) => {
-      this.chartData = placements.map((placement) => ({
-        name: placement.key,
-        value: placement.invalid_total,
-      }));
-    });
+    // TODO: Subscribe to the placements state and populate chartData
   }
 }

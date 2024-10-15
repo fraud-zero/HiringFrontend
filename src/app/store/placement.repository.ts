@@ -1,7 +1,31 @@
-import {Injectable} from '@angular/core';
-import {createStore, select, withProps} from '@ngneat/elf';
-import {Placement} from '../models/placement.model';
-import {BehaviorSubject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { createStore, select, withProps } from '@ngneat/elf';
+import { BehaviorSubject } from 'rxjs';
+
+export interface Placement {
+  key: string;
+  platform: string;
+  total: number;
+  invalid_total: number;
+  invalid_total_percent: string;
+  pixel_stuffing: number;
+  pixel_stuffing_percent: string;
+  viewable: number;
+  viewable_percent: string;
+  non_viewable: number;
+  non_viewable_percent: string;
+  mfa_site_symptoms: number;
+  mfa_site_symptoms_percent: string;
+  other_invalid: number;
+  other_invalid_percent: string;
+}
+
+export interface Pagination {
+  total_hits: number;
+  per_page: number;
+  current_page: number;
+  total_pages: number;
+}
 
 export interface PlacementState {
   placements: Placement[];
@@ -36,17 +60,17 @@ const initialState: PlacementState = {
     totalHits: 0,
   },
   sort: {
-    sort_by: 'total', // Default sort field
-    sort_order: 'desc', // Default sort order
+    sort_by: 'total',
+    sort_order: 'desc',
   },
 };
 
 const store = createStore(
-  {name: 'placement'},
+  { name: 'placement' },
   withProps<PlacementState>(initialState)
 );
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PlacementRepository {
   // Selectors
   placements$ = store.pipe(select((state) => state.placements));
@@ -56,27 +80,27 @@ export class PlacementRepository {
 
   // Updaters
   updatePlacements(placements: Placement[]) {
-    store.update((state) => ({...state, placements}));
+    store.update((state) => ({ ...state, placements }));
   }
 
   updateFilters(filters: Partial<PlacementState['filters']>) {
     store.update((state) => ({
       ...state,
-      filters: {...state.filters, ...filters},
+      filters: { ...state.filters, ...filters },
     }));
   }
 
   updatePagination(pagination: Partial<PlacementState['pagination']>) {
     store.update((state) => ({
       ...state,
-      pagination: {...state.pagination, ...pagination},
+      pagination: { ...state.pagination, ...pagination },
     }));
   }
 
   updateSort(sort: Partial<PlacementState['sort']>) {
     store.update((state) => ({
       ...state,
-      sort: {...state.sort, ...sort},
+      sort: { ...state.sort, ...sort },
     }));
   }
 
